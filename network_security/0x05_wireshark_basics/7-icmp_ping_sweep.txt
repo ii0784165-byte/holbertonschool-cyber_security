@@ -1,1 +1,1 @@
-udp.type == 8 or udp.type == 0
+icmp.type == 8 or icmp.type == 0

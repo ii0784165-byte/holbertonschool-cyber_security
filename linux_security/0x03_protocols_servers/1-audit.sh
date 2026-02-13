@@ -1,3 +1,2 @@
 #!/bin/bash
 if [ ! -f /etc/ssh/sshd_config ]; then echo "SSH konfiqurasiya faylı mövcud deyil!"; exit 1; fi; standart_settings=("Include /etc/ssh/sshd_config.d/*.conf" "KbdInteractiveAuthentication no" "UsePAM yes" "X11Forwarding yes" "PrintMotd no" "AcceptEnv LANG LC_*" "Subsystem       sftp    /usr/lib/openssh/sftp-server" "PasswordAuthentication yes" "PermitRootLogin yes" "AuthorizedKeysFile .ssh/authorized_keys" "TCPKeepAlive yes"); for setting in "${standart_settings[@]}"; do grep -q -E "^$setting" /etc/ssh/sshd_config && echo "Pattern found: $setting" || echo "Pattern not found: $setting"; done
-

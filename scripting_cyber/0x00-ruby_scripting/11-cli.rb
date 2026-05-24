@@ -60,23 +60,21 @@ elsif options[:list]
   if tasks.empty?
     puts "No tasks found."
   else
-    # CRITICAL: Checker-in mütləq gözlədiyi "Tasks:" başlığı
     puts "Tasks:"
-    tasks.each do |task|
-      puts task
-    end
-  end
-
-elsif options[:list]
-  tasks = load_tasks
-  if tasks.empty?
-    puts "No tasks found."
-  else
-    # 1. Başlığı çap edirik
-    puts "Tasks:"
-    
-    # 2. Tapşırıqları yenidən nömrələyərək çıxarırıq
     tasks.each_with_index do |task, index|
       puts "#{index + 1}. #{task}"
     end
   end
+
+elsif options[:remove]
+  tasks = load_tasks
+  index_to_remove = options[:remove] - 1
+
+  if index_to_remove >= 0 && index_to_remove < tasks.length
+    removed_task = tasks.delete_at(index_to_remove)
+    save_tasks(tasks)
+    puts "Task '#{removed_task}' removed."
+  else
+    puts "Invalid task index."
+  end
+end

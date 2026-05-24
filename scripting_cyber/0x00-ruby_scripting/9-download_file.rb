@@ -1,13 +1,12 @@
-#!/bin/bash
-
+#!/usr/bin/env ruby
 require 'open-uri'
 require 'uri'
 require 'fileutils'
 
-# Arqument sayını yoxlayırıq
+# Arqument sayını dəqiq yoxlayırıq
 if ARGV.length != 2
   puts "Usage: 9-download_file.rb URL LOCAL_FILE_PATH"
-  exit
+  exit 1
 end
 
 url = ARGV[0]

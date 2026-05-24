@@ -4,15 +4,18 @@ def print_arguments
   if ARGV.empty?
     puts "No arguments provided."
   else
-    # 1. Başlığı çap edirik
-    puts "Arguments:"
+    # Öncə bütün çıxışı bir string kimi massivə yığırıq
+    output = ["Arguments:"]
     
-    # 2. Arqumentləri nömrələyərək çap edirik (1. 1, 2. 2 və s.)
     ARGV.each_with_index do |arg, index|
-      puts "#{index + 1}. #{arg}"
+      output << "#{index + 1}. #{arg}"
     end
     
-    # 3. Checker-in gözlədiyi o son boş sətir
-    puts ""
+    # Massivi yeni sətirlərlə birləşdiririk və SONUNA mütləq bir dənə \n qoyuruq
+    # Bu üsul faylın sonunda enter olub-olmamasından asılı olmayaraq HƏMİŞƏ eyni baytı verəcək
+    final_string = output.join("\n") + "\n"
+    
+    # Ekrana print ilə çıxarırıq (print əlavə newline qoymur, nə yazılıbsa onu çıxarır)
+    print final_string
   end
 end

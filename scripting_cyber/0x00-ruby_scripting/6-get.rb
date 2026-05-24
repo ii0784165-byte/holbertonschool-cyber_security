@@ -2,18 +2,22 @@
 
 require 'net/http'
 require 'uri'
+require 'json' # Səliqəli formatlama üçün JSON kitabxanasını daxil edirik
 
 def get_request(url)
-  # 1. String formatındakı URL-i Net::HTTP-nin başa düşəcəyi URI obyektinə çeviririk
   uri = URI.parse(url)
-
-  # 2. HTTP GET istəyini göndəririk və cavabı (response) alırıq
   response = Net::HTTP.get_response(uri)
 
-  # 3. Status kodunu və mesajını ekrana çıxarırıq (Məsələn: 200 OK)
   puts "Response status: #{response.code} #{response.message}"
-
-  # 4. Cavabın gövdəsini (Response Body) ekrana yazdırırıq
   puts "Response body:"
-  puts response.body
+  
+  begin
+    # Gələn body-ni parse edib yenidən səliqəli (pretty) formata salırıq
+    # Bu üsul {} yazısını avtomatik olaraq alt-bata sətirlərə böləcək
+    parsed_body = JSON.parse(response.body)
+    puts JSON.pretty_generate(parsed_body)
+  rescue
+    # Əgər hər hansı bir səbəbdən gələn yazı JSON deyilsə, olduğu kimi çıxarsın
+    puts response.body
+  end
 end

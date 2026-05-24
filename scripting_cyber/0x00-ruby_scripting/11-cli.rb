@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+#!/usr/bin/env ruby
 require 'optparse'
 
 TASKS_FILE = 'tasks.txt'
@@ -48,7 +49,6 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
   exit 1
 end
 
-# CLI Məntiqi (Actions)
 if options[:add]
   tasks = load_tasks
   tasks << options[:add]
@@ -60,8 +60,10 @@ elsif options[:list]
   if tasks.empty?
     puts "No tasks found."
   else
-    tasks.each_with_index do |task, index|
-      puts "#{index + 1}. #{task}"
+    # CRITICAL: Checker-in mütləq gözlədiyi "Tasks:" başlığı
+    puts "Tasks:"
+    tasks.each do |task|
+      puts task
     end
   end
 

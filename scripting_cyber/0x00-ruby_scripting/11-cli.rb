@@ -67,15 +67,16 @@ elsif options[:list]
     end
   end
 
-elsif options[:remove]
+elsif options[:list]
   tasks = load_tasks
-  index_to_remove = options[:remove] - 1
-
-  if index_to_remove >= 0 && index_to_remove < tasks.length
-    removed_task = tasks.delete_at(index_to_remove)
-    save_tasks(tasks)
-    puts "Task '#{removed_task}' removed."
+  if tasks.empty?
+    puts "No tasks found."
   else
-    puts "Invalid task index."
+    # 1. Başlığı çap edirik
+    puts "Tasks:"
+    
+    # 2. Tapşırıqları yenidən nömrələyərək çıxarırıq
+    tasks.each_with_index do |task, index|
+      puts "#{index + 1}. #{task}"
+    end
   end
-end

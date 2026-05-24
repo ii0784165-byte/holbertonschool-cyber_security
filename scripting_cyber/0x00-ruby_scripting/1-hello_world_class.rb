@@ -9,7 +9,3 @@ class HelloWorld
     puts @message
   end
 end
-
-# KLASSIN XARİCİNDƏ (Faylın sonunda obyekti çağırırıq):
-test_obyekt = HelloWorld.new
-test_obyekt.print_hello
